@@ -12,5 +12,9 @@ function loadAndTransform(filename, splitter, transform) {
 }
 
 module.exports = {
-    loadAndTransform: loadAndTransform
+    loadAndTransform: loadAndTransform,
+    sets: {
+        intersect: (first, second) => new Set([...first].filter((x) => second.has(x))),
+        difference: (first, second) => new Set([...first].filter((x) => !second.has(x)))
+    }
 }
