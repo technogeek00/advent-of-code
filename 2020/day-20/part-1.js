@@ -33,19 +33,6 @@ let tiles = loadAndTransform('input.txt', '\n\n', (tile) => {
     }
 });
 
-// sanity check no borders repeat more than once (for adjacent)
-let borders = tiles.reduce((borderCount, tile) => {
-    Object.keys(tile.borders)
-        .forEach((name) => {
-            let value = tile.borders[name].value;
-            if(!borderCount.has(value)) {
-                borderCount.set(value, 0);
-            }
-            borderCount.set(value, borderCount.get(value) + 1);
-        });
-    return borderCount;
-}, new Map());
-
 let BORDERS = ['top', 'left', 'right', 'bottom'];
 
 function matchingBorder(search, tile) {
