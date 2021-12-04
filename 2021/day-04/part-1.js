@@ -56,10 +56,7 @@ let winningNumber = drawn.find((number) => {
 
 logger.debug(gridWin);
 
-let sum = 0;
-gridWin.nums.forEach((item) => {
-    sum = sum + item;
-});
+let sum = [...gridWin.nums].reduce((sum, num) => sum + num, 0);
 
 logger.debug(`Winning Number: ${winningNumber}`);
 logger.debug(`Sum: ${sum}`);
