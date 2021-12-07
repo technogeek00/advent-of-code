@@ -1,6 +1,15 @@
 const fs = require('fs');
 
-const DEBUG = false;
+const IS_DEBUG = process.argv.indexOf('--debug') != -1;
+const IS_GOLD = process.argv.indexOf('--gold') != -1;
+
+let inputFile = 'test.txt';
+let inputArg = process.argv.indexOf('--input');
+if(inputArg != -1) {
+    inputFile = process.argv[inputArg + 1];
+}
+
+console.debug(`${IS_DEBUG ? '[DEBUG] ' : ''}Initiating ${IS_GOLD ? 'silver' : 'gold'} run with ${inputFile}`);
 
 const identityTransform = (elm) => elm;
 
@@ -29,7 +38,12 @@ module.exports = {
         difference: (first, second) => new Set([...first].filter((x) => !second.has(x)))
     },
     logger: {
-        debug: (...message) => DEBUG ? console.log(...message) : null,
+        debug: (...message) => IS_DEBUG ? console.log(...message) : null,
         info: (...message) => console.log(...message)
+    },
+    vars: {
+        IS_DEBUG: IS_DEBUG,
+        IS_GOLD: IS_GOLD,
+        INPUT_FILE: inputFile
     }
 }
