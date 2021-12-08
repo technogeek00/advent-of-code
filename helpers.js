@@ -9,7 +9,7 @@ if(inputArg != -1) {
     inputFile = process.argv[inputArg + 1];
 }
 
-console.debug(`${IS_DEBUG ? '[DEBUG] ' : ''}Initiating ${IS_GOLD ? 'silver' : 'gold'} run with ${inputFile}`);
+console.debug(`${IS_DEBUG ? '[DEBUG] ' : ''}Initiating ${IS_GOLD ? 'gold' : 'silver'} run with ${inputFile}`);
 
 const identityTransform = (elm) => elm;
 
