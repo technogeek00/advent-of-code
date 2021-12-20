@@ -29,7 +29,7 @@ function initImage(source) {
     return {
         points: new Set(),
         bounds: {
-            infinite: source ? !source.bounds.infinite : false,
+            infinite: enhancements.has(0) ? source ? !source.bounds.infinite : false : false,
             x: {
                 min: source ? source.bounds.x.min - 1 : Number.MAX_SAFE_INTEGER,
                 max: source ? source.bounds.x.max + 1 : Number.MIN_SAFE_INTEGER
@@ -54,6 +54,13 @@ function renderImage(image, padding = 10) {
     return render;
 }
 
+enhancements = enhancements.split('').reduce((enhancements, char, idx) => {
+    if(char == '#') {
+        enhancements.add(idx);
+    }
+    return enhancements;
+}, new Set());
+
 let image = imageRaw.split('\n').reduce((image, row, y) => {
     row.split('').forEach((col, x) => {
         if(col == '#') {
@@ -68,12 +75,6 @@ let image = imageRaw.split('\n').reduce((image, row, y) => {
     return image;
 }, initImage());
 
-enhancements = enhancements.split('').reduce((enhancements, char, idx) => {
-    if(char == '#') {
-        enhancements.add(idx);
-    }
-    return enhancements;
-}, new Set());
 
 function enhanceImage(image, enhancements) {
     // we have to actually iterate around the maximized grid with 1 row/col of
