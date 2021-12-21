@@ -3,7 +3,7 @@ const fs = require('fs');
 const IS_DEBUG = process.argv.indexOf('--debug') != -1;
 const IS_GOLD = process.argv.indexOf('--gold') != -1;
 
-let inputFile = 'test.txt';
+let inputFile = process.argv.indexOf('--real') != -1 ? 'input.txt' : 'test.txt';
 let inputArg = process.argv.indexOf('--input');
 if(inputArg != -1) {
     inputFile = process.argv[inputArg + 1];
